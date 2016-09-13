@@ -41,7 +41,7 @@ public class DaoImplementation implements Dao {
     		c.close();
 		}
 		catch (Exception e) {
-			System.out.println("failure");	
+			System.out.println(e);	
 		}
 		return transactions;
 	}
@@ -70,7 +70,7 @@ public class DaoImplementation implements Dao {
             c.close();
         }
         catch (Exception e) {
-                System.out.println("Failure");        
+                System.out.println(e);        
         }
         return transactions;
 }

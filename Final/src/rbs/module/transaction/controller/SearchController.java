@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.io.PrintWriter;
 
 import rbs.module.transaction.dao.DaoImplementation;
+import rbs.module.transaction.model.Transaction;
 @WebServlet("/SearchController")
 public class SearchController extends HttpServlet {
 	
@@ -33,11 +36,15 @@ public class SearchController extends HttpServlet {
 		PrintWriter out =response.getWriter();
 		DaoImplementation d = new DaoImplementation();
 		if(request.getParameter("select").equals("criteria1"))
-		{
-			
+		{	
 			String username = request.getParameter("criteria_value");
 			double y = Double.parseDouble(username);
-			out.println(d.getTransactions(y));
+			//out.println(d.getTransactions(y));
+			ArrayList arr =d.getTransactions(y);
+			
+			request.setAttribute("resultSet", arr); 
+			getServletConfig().getServletContext().getRequestDispatcher("/SearchDetails.jsp").forward(request,response);
+
 		}
 		if(request.getParameter("select").equals("criteria2"))
 		{String username = request.getParameter("criteria_value");
